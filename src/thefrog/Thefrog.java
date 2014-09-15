@@ -12,6 +12,7 @@ public class Thefrog extends BasicGame {
 	public static final int GAME_WIDTH = 640;
 	public static final int GAME_HEIGHT = 480;
 	private Image image;
+	private frog Frog;
 
 	public Thefrog(String title) {
 		super(title);
@@ -21,12 +22,14 @@ public class Thefrog extends BasicGame {
 	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
 		g.drawImage(image, 0, 0);
+		Frog.render();
 		
 	}
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		image = new Image("res/bg.png");
+		Frog = new frog(GAME_WIDTH/2, 40, 0);
 		
 		
 	}
