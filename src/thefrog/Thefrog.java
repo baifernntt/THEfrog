@@ -20,13 +20,14 @@ public class Thefrog extends BasicGame {
 
 	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
-		// TODO Auto-generated method stub
+		g.drawImage(image, 0, 0);
 		
 	}
 
 	@Override
 	public void init(GameContainer container) throws SlickException {
-		Image background = new Image("res/bg.png");
+		image = new Image("res/bg.png");
+		
 		
 	}
 
