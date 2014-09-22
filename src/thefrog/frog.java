@@ -5,8 +5,10 @@ import org.newdawn.slick.SlickException;
 
 public class frog {
 	
-	float x;
-	float y;
+	public float x;
+	public  float y;
+	private float vjump;
+	public  float vy;
 	
 	
 	private static Image image;
@@ -16,7 +18,8 @@ public class frog {
 	public frog(float x, float y ,float vjump) throws SlickException {
 		this.x = x;
 		this.y = y;
-		
+		this.vy = vjump;
+		this.vjump = vjump;
 	    
 		image = new Image("res/cut.png");
 	}
@@ -29,5 +32,14 @@ public class frog {
 		
 	}
 	
+	public void update() {
+		y += vy;
+	    vy -= Thefrog.G;
+		
+	}
 	
+	
+	public void jump() { 
+	    vy = vjump;
+	  }	
 }
