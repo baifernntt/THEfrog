@@ -17,10 +17,11 @@ public class Thefrog extends BasicGame {
 	public static final float G = (float) 0.5;
 	public static final float Frog_JUMP_VY = 10;
 	private frog Frog;
+	private tree Tree;
 	private boolean isStarted;
 	private boolean isGameOver;
 	//private BG Bg;
-	private BG[] bG = new BG[3];
+	//private BG[] bG = new BG[3];
 	private Image land;
 	public static final float bg_Vy = -3;
 
@@ -32,10 +33,10 @@ public class Thefrog extends BasicGame {
 	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
 		g.drawImage(land, 0, 0);
-		for (BG Bg : bG) {
-		      Bg.render();
-		}
-		
+		//for (BG Bg : bG) {
+		      //Bg.render();
+		//}
+		Tree.render();
 		Frog.render();
 		
 		
@@ -44,11 +45,12 @@ public class Thefrog extends BasicGame {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		
-	    bG[0] = new BG(0,0,bg_Vy);
-	    bG[1] = new BG(0,240,bg_Vy);
-	    bG[2] = new BG(0,480,bg_Vy);
+	    //bG[0] = new BG(0,0,bg_Vy);
+	    //bG[1] = new BG(0,240,bg_Vy);
+	    //bG[2] = new BG(0,480,bg_Vy);
 	    land = new Image("res/bg1.png");
 		Frog = new frog(GAME_WIDTH/2, 40, Frog_JUMP_VY);
+		Tree = new tree(GAME_WIDTH/2+20,GAME_HEIGHT/2+30);
 		isStarted = false;
 		
 	}
@@ -58,18 +60,19 @@ public class Thefrog extends BasicGame {
 		
 		if (!isGameOver){	
 			if(isStarted == true){
-			Frog.update();
+				Frog.update();
 			
-			for(BG Bg : bG){
-				Bg.update();
-			}
+			
+			//for(BG Bg : bG){
+				//Bg.update();
+			//}
 		
 	}
 		}
 		
 		if (isGameOver){
-			Input input = container.getInput();
-			if(input.isKeyDown(Input.KEY_ENTER)){
+			Input input1 = container.getInput();
+			if(input1.isKeyDown(Input.KEY_ENTER)){
 				init(container);
 				isGameOver = false ;
 				
@@ -78,8 +81,8 @@ public class Thefrog extends BasicGame {
 		
 	}
 	
-	@Override
 	public void keyPressed(int key, char c) {
+		
 		if (key == Input.KEY_ENTER){
 			isStarted = true;	
 		}

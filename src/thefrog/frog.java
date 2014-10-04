@@ -42,4 +42,13 @@ public class frog {
 	public void jump() { 
 	    vy = vjump;
 	  }	
+	public void moveLeft() {
+		x -= 1;
+		
+	}
+
+	public void moveRight() {
+		x +=1;
+		
+	}
 }
