@@ -11,6 +11,7 @@ public class frog {
 	public  float vy;
 	
 	
+	
 	private static Image image;
 	public static final int WIDTH = 60;
 	public static final int HEIGHT = 60;
@@ -35,6 +36,9 @@ public class frog {
 	public void update() {
 		y += vy;
 	    vy -= Thefrog.G;
+	    if(y < 40 ){
+	    	y = 40;
+	    }
 		
 	}
 	
@@ -42,13 +46,5 @@ public class frog {
 	public void jump() { 
 	    vy = vjump;
 	  }	
-	public void moveLeft() {
-		x -= 1;
-		
-	}
-
-	public void moveRight() {
-		x +=1;
-		
-	}
+	
 }

@@ -89,6 +89,7 @@ public class Thefrog extends BasicGame {
 			if (key == Input.KEY_SPACE) {	
 				Frog.jump();
 		}
+			
 			if (isGameOver){
 				if(key == Input.KEY_ENTER){
 					isGameOver = true;
