@@ -7,21 +7,33 @@ public class tree {
 	private Image image;
 	public static final int WIDTH = 120;
 	public static final int HEIGHT = 60;
-	private int a;
-	private int b;
+	private int x;
+	private int y;
+	private int vx;
 	
-	public tree(int a,int b) throws SlickException {
+	public tree(int a,int b, int vx) throws SlickException {
 		
-		this.a =a;
-		this.b =b;
+		this.x =a;
+		this.y =b;
+		this.vx = vx;
 		image = new Image("res/tree.png");
 		
 	}
 	
+	
+
 	public  void render(){
-		image.draw(Thefrog.GAME_WIDTH - a,Thefrog.GAME_HEIGHT-b);
+		image.draw(Thefrog.GAME_WIDTH - x,Thefrog.GAME_HEIGHT-y);
 	}
 
+	public void update() {
+	    x -= vx;
+	    if(x > 640){
+	    	x =130;
+	    	//x -= vx;
+	    }
+	    
+	}
 	
 
 	
