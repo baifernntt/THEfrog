@@ -16,11 +16,12 @@ public class Thefrog extends BasicGame {
 	public static final int GAME_HEIGHT = 480;
 	public static final float G = (float) 0.5;
 	public static final float Frog_JUMP_VY = 10;
-	public static final int Tree_VX = -3;
+	public static final int Tree_VX = -2;
 	private frog Frog;
 	private tree Tree;
 	private boolean isStarted;
 	private boolean isGameOver;
+	private tree[] trees;
 	//private BG Bg;
 	//private BG[] bG = new BG[3];
 	private Image land;
@@ -37,7 +38,10 @@ public class Thefrog extends BasicGame {
 		//for (BG Bg : bG) {
 		      //Bg.render();
 		//}
-		Tree.render();
+		for (tree Trees: trees){
+			Trees.render();
+		}
+		//Tree.render();
 		Frog.render();
 		
 		
@@ -51,9 +55,12 @@ public class Thefrog extends BasicGame {
 	    //bG[2] = new BG(0,480,bg_Vy);
 	    land = new Image("res/bg1.png");
 		Frog = new frog(GAME_WIDTH/2, 40, Frog_JUMP_VY);
-		Tree = new tree(GAME_WIDTH/2+40,170,Tree_VX);
+		//Tree = new tree(GAME_WIDTH/2+40,170,Tree_VX);
 		isStarted = false;
-		
+		trees = new tree[3];
+	    for (int i = 0; i < 3; i++) {
+	      trees[i] = new tree(GAME_WIDTH/2*i-30, 120*i+130 ,Tree_VX-i);
+	    }
 	}
 
 	@Override
@@ -62,8 +69,11 @@ public class Thefrog extends BasicGame {
 		if (!isGameOver){	
 			if(isStarted == true){
 				Frog.update();
-				Tree.update();
+				//Tree.update();
 			
+				for(tree Trees: trees){
+					Trees.update();
+				}
 			//for(BG Bg : bG){
 				//Bg.update();
 			//}
