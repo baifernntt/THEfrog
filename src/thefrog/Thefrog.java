@@ -1,5 +1,6 @@
 package thefrog;
 
+import org.lwjgl.Sys;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
 import org.newdawn.slick.GameContainer;
@@ -27,7 +28,7 @@ public class Thefrog extends BasicGame {
 	public static final float bg_Vy = -3;
 	private int treeCurrent=0;
 	public static int checkTrees = 0;
-	
+	long runningTime = 200;
 	
 	
 	public Thefrog(String title) {
@@ -75,11 +76,11 @@ public class Thefrog extends BasicGame {
 			
 				for(int i=0;i<3;i++){
 					trees[i].update();
-					
-				if(Frog.isCollide(trees[treeCurrent])){
-					System.out.println("Collision");
-					treeCurrent++;
-				}
+				if(treeCurrent<3)
+					if(Frog.isCollide(trees[treeCurrent])){
+						System.out.println("Collision");
+						treeCurrent++;
+					}
 					
 				}
 			}
@@ -113,9 +114,10 @@ public class Thefrog extends BasicGame {
 			}
 	    }
 	
+	
 	public static void main(String[] args) {
 	    try {
-	      Thefrog game = new Thefrog("THE frog");
+	      Thefrog game = new Thefrog("THE FROG");
 	      AppGameContainer appgc = new AppGameContainer(game);
 	      appgc.setDisplayMode(GAME_WIDTH, GAME_HEIGHT, false);
 	      appgc.setMinimumLogicUpdateInterval(1000 / 60);

@@ -64,7 +64,7 @@ public class frog {
 				y= t.getY()+tree.HEIGHT/2-tree.HEIGHT/2;
 				this.g=0;
 				this.vx=t.getVx();
-				
+				score++;
 				return true;
 				
 			}

@@ -31,10 +31,10 @@ public class tree {
 	}
 
 	public void update() {
-	    //x -= vx;
+	    
 	    if(x > 640 - WIDTH){
 	    	vx*=-1;
-	    	//x -= vx;
+	    	
 	    }
 	    else if(x<0)
 	    	vx*=-1;
