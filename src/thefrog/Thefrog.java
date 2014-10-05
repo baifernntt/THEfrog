@@ -15,7 +15,7 @@ public class Thefrog extends BasicGame {
 	public static final int GAME_WIDTH = 640;
 	public static final int GAME_HEIGHT = 480;
 	public static final float G = (float) 0.5;
-	public static final float Frog_JUMP_VY = 10;
+	public static final float Frog_JUMP_VY = 11;
 	public static final int Tree_VX = -2;
 	private frog Frog;
 	private tree Tree;
@@ -43,6 +43,7 @@ public class Thefrog extends BasicGame {
 		}
 		//Tree.render();
 		Frog.render();
+		g.drawString("score = " + Frog.score, 320, 20);
 		
 		
 	}
@@ -54,12 +55,16 @@ public class Thefrog extends BasicGame {
 	    //bG[1] = new BG(0,240,bg_Vy);
 	    //bG[2] = new BG(0,480,bg_Vy);
 	    land = new Image("res/bg1.png");
-		Frog = new frog(GAME_WIDTH/2, 40, Frog_JUMP_VY);
+		Frog = new frog(GAME_WIDTH/2, 40,Frog_JUMP_VY);
 		//Tree = new tree(GAME_WIDTH/2+40,170,Tree_VX);
 		isStarted = false;
+		inittrees();
+	}
+
+	private void inittrees() throws SlickException {
 		trees = new tree[3];
 	    for (int i = 0; i < 3; i++) {
-	      trees[i] = new tree(GAME_WIDTH/2*i-30, 120*i+130 ,Tree_VX-i);
+	      trees[i] = new tree(GAME_WIDTH/2+40*i, 120*i+150 ,Tree_VX-i);
 	    }
 	}
 
@@ -71,8 +76,12 @@ public class Thefrog extends BasicGame {
 				Frog.update();
 				//Tree.update();
 			
-				for(tree Trees: trees){
-					Trees.update();
+				for(int i=0;i<3;i++){
+					trees[i].update();
+					
+					if(Frog.isCollide(trees[i])){
+						System.out.println("Collision! "+i);
+					}
 				}
 			//for(BG Bg : bG){
 				//Bg.update();

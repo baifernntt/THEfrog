@@ -11,6 +11,10 @@ public class tree {
 	private int y;
 	private int vx;
 	
+	public float getX() { return x; }
+	public float getY() { return y; }
+	public float getVx() { return vx; }
+	
 	public tree(int a,int b, int vx) throws SlickException {
 		
 		this.x =a;
@@ -23,15 +27,18 @@ public class tree {
 	
 
 	public  void render(){
-		image.draw(Thefrog.GAME_WIDTH - x,Thefrog.GAME_HEIGHT-y);
+		image.draw(x,Thefrog.GAME_HEIGHT-y);
 	}
 
 	public void update() {
-	    x -= vx;
-	    if(x > 640){
-	    	x =130;
+	    //x -= vx;
+	    if(x > 640 - WIDTH){
+	    	vx*=-1;
 	    	//x -= vx;
 	    }
+	    else if(x<0)
+	    	vx*=-1;
+	    x-=vx;
 	    
 	}
 	

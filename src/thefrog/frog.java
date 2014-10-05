@@ -9,7 +9,7 @@ public class frog {
 	public  float y;
 	private float vjump;
 	public  float vy;
-	
+	int score = 0;
 	
 	
 	private static Image image;
@@ -45,6 +45,18 @@ public class frog {
 	
 	public void jump() { 
 	    vy = vjump;
+
 	  }	
-	
+
+	public boolean isCollide(tree t){
+		if (Math.abs(y-t.getY())<=HEIGHT){
+			if(Math.abs( (x+WIDTH/2) - (t.getX()+tree.WIDTH/2) ) <= tree.WIDTH)
+			{
+				x= t.getX() ;
+				y= t.getY()+tree.HEIGHT/2-tree.HEIGHT/2;
+			}
+		}
+		return false ; 
+		
+	}
 }
