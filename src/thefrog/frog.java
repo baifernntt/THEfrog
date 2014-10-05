@@ -41,9 +41,9 @@ public class frog {
 		vy-=g;
 		 if(x > 640 - WIDTH){
 		    	vx*=-1;
-		    	//x -= vx;
+		    	
 		    }
-		    else if(x<0)
+		    else if(x<60)
 		    	vx*=-1;
 	    x-=this.vx;
 	    if(y < 40 ){

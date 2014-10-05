@@ -23,8 +23,6 @@ public class Thefrog extends BasicGame {
 	private boolean isGameOver;
 	private tree[] trees;
 	private boolean[] useTree = new boolean[]{false,false,false};
-	//private BG Bg;
-	//private BG[] bG = new BG[3];
 	private Image land;
 	public static final float bg_Vy = -3;
 	private int treeCurrent=0;
@@ -40,13 +38,11 @@ public class Thefrog extends BasicGame {
 	@Override
 	public void render(GameContainer container, Graphics g) throws SlickException {
 		g.drawImage(land, 0, 0);
-		//for (BG Bg : bG) {
-		      //Bg.render();
-		//}
+		
 		for (tree Trees: trees){
 			Trees.render();
 		}
-		//Tree.render();
+		
 		Frog.render();
 		g.drawString("score = " + Frog.score, 320, 20);
 		
@@ -56,12 +52,9 @@ public class Thefrog extends BasicGame {
 	@Override
 	public void init(GameContainer container) throws SlickException {
 		
-	    //bG[0] = new BG(0,0,bg_Vy);
-	    //bG[1] = new BG(0,240,bg_Vy);
-	    //bG[2] = new BG(0,480,bg_Vy);
+	    
 	    land = new Image("res/bg1.png");
 		Frog = new frog(GAME_WIDTH/2, 40,Frog_JUMP_VY);
-		//Tree = new tree(GAME_WIDTH/2+40,170,Tree_VX);
 		isStarted = false;
 		inittrees();
 	}
@@ -79,7 +72,6 @@ public class Thefrog extends BasicGame {
 		if (!isGameOver){	
 			if(isStarted == true){
 					Frog.update();
-				//Tree.update();
 			
 				for(int i=0;i<3;i++){
 					trees[i].update();
@@ -90,10 +82,6 @@ public class Thefrog extends BasicGame {
 				}
 					
 				}
-			//for(BG Bg : bG){
-				//Bg.update();
-			//}
-		
 			}
 		}
 		
