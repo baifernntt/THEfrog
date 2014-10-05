@@ -22,11 +22,16 @@ public class Thefrog extends BasicGame {
 	private boolean isStarted;
 	private boolean isGameOver;
 	private tree[] trees;
+	private boolean[] useTree = new boolean[]{false,false,false};
 	//private BG Bg;
 	//private BG[] bG = new BG[3];
 	private Image land;
 	public static final float bg_Vy = -3;
-
+	private int treeCurrent=0;
+	public static int checkTrees = 0;
+	
+	
+	
 	public Thefrog(String title) {
 		super(title);
 		
@@ -64,7 +69,7 @@ public class Thefrog extends BasicGame {
 	private void inittrees() throws SlickException {
 		trees = new tree[3];
 	    for (int i = 0; i < 3; i++) {
-	      trees[i] = new tree(GAME_WIDTH/2+40*i, 120*i+150 ,Tree_VX-i);
+	      trees[i] = new tree(80+100*i, 120*i+150 ,Tree_VX-i);
 	    }
 	}
 
@@ -73,21 +78,23 @@ public class Thefrog extends BasicGame {
 		
 		if (!isGameOver){	
 			if(isStarted == true){
-				Frog.update();
+					Frog.update();
 				//Tree.update();
 			
 				for(int i=0;i<3;i++){
 					trees[i].update();
 					
-					if(Frog.isCollide(trees[i])){
-						System.out.println("Collision! "+i);
-					}
+				if(Frog.isCollide(trees[treeCurrent])){
+					System.out.println("Collision");
+					treeCurrent++;
+				}
+					
 				}
 			//for(BG Bg : bG){
 				//Bg.update();
 			//}
 		
-	}
+			}
 		}
 		
 		if (isGameOver){
@@ -104,7 +111,7 @@ public class Thefrog extends BasicGame {
 	public void keyPressed(int key, char c) {
 		
 		if (key == Input.KEY_ENTER){
-			isStarted = true;	
+			isStarted = true;
 		}
 			if (key == Input.KEY_SPACE) {	
 				Frog.jump();
