@@ -1,8 +1,11 @@
 package thefrog;
 
+import java.awt.Font;
+
 import org.lwjgl.Sys;
 import org.newdawn.slick.AppGameContainer;
 import org.newdawn.slick.BasicGame;
+import org.newdawn.slick.Color;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -43,7 +46,8 @@ public class Thefrog extends BasicGame {
 		}
 
 		Frog.render();
-		g.drawString("score = " + Frog.score, 320, 20);
+		g.setColor(Color.darkGray);
+		g.drawString("score = " + Frog.score, 280, 20);
 
 	}
 
@@ -107,7 +111,9 @@ public class Thefrog extends BasicGame {
 
 		if (isGameOver) {
 			if (key == Input.KEY_ENTER) {
-				isGameOver = true;
+				treeCurrent=0;
+				Frog.vx=0;
+				isGameOver = false;
 			}
 
 		}
