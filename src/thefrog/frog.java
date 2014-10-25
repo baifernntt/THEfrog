@@ -17,11 +17,12 @@ public class frog {
 	public static final int WIDTH = 60;
 	public static final int HEIGHT = 60;
 	private float g;
+	
 
 	public frog(float x, float y, float vjump) throws SlickException {
 		this.x = x;
 		this.y = y;
-		this.vy = vjump;
+		this.vy = 0;
 		this.vjump = vjump;
 		this.vx = 0;
 		g = Thefrog.G;
