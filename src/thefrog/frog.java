@@ -10,7 +10,7 @@ public class frog {
 	private float vjump;
 	public float vy;
 	public float vx;
-	int score = 0;
+	int score = -1;
 	private float xfrog;
 	private float yfrog;
 	private static Image image;
@@ -43,8 +43,8 @@ public class frog {
 		} else if (x < 60)
 			vx *= -1;
 		x -= this.vx;
-		if (y < 40) {
-			y = 40;
+		if (y < 20) {
+			y = 20;
 		}
 		
 	}

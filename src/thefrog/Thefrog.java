@@ -33,6 +33,7 @@ public class Thefrog extends BasicGame {
 	private int time = 30;
 	private Image started;
 	private Image overgame;
+	private clock Clock;
 
 	public Thefrog(String title) {
 		super(title);
@@ -48,9 +49,9 @@ public class Thefrog extends BasicGame {
 			for (tree Trees : trees) {
 				Trees.render();
 			}
-
+			//Clock.render();
 			Frog.render();
-			g.setColor(Color.darkGray);
+			g.setColor(Color.white);
 			g.drawString("score = " + Frog.score, 280, 20);
 			g.drawString("Time : " + time, 500, 20);
 		}
@@ -58,6 +59,7 @@ public class Thefrog extends BasicGame {
 			g.drawImage(started, 0, 0);
 		} else if (isGameOver == true) {
 			g.drawImage(overgame, 0, 0);
+			g.drawString(" " + Frog.score, 280, 350);
 		}
 
 	}
@@ -67,6 +69,7 @@ public class Thefrog extends BasicGame {
 
 		land = new Image("res/bg1.png");
 		Frog = new frog(GAME_WIDTH / 2, 40, Frog_JUMP_VY);
+		//Clock = new clock(300, 200);
 		inittrees();
 		isStarted = false;
 		started = new Image("res/start.png");
@@ -74,9 +77,10 @@ public class Thefrog extends BasicGame {
 	}
 
 	private void inittrees() throws SlickException {
-		trees = new tree[3];
-		for (int i = 0; i < 3; i++) {
-			trees[i] = new tree(80 + 100 * i, 120 * i + 150, Tree_VX - i);
+		trees = new tree[4];
+		trees[0] = new tree(GAME_WIDTH / 2, 40, Tree_VX);
+		for (int i = 1; i < 4; i++) {
+			trees[i] = new tree(80 + 100 * i, 130 * i + 40, Tree_VX - i);
 		}
 	}
 
@@ -91,14 +95,14 @@ public class Thefrog extends BasicGame {
 			if (isStarted == true) {
 				Frog.update();
 				time();
-				if (treeCurrent != 0 && Frog.y == 40) {
+				if (treeCurrent != 0 && Frog.y == 20) {
 					isGameOver = true;
 					System.out.println("Game Over");
 
 				}
-				for (int i = 0; i < 3; i++) {
+				for (int i = 0; i < 4; i++) {
 					trees[i].update();
-					if (treeCurrent < 3)
+					if (treeCurrent < 4)
 						if (Frog.isCollide(trees[treeCurrent])) {
 							System.out.println("Collision");
 							treeCurrent++;
@@ -107,16 +111,16 @@ public class Thefrog extends BasicGame {
 			}
 		}
 
-		if (isGameOver) {
-			Input input1 = container.getInput();
-			if (input1.isKeyDown(Input.KEY_ENTER)) {
-				init(container);
-				isGameOver = false;
-				restart(input);
-				// newgame(input);
+			if (isGameOver) {
+				Input input1 = container.getInput();
+				if (input1.isKeyDown(Input.KEY_ENTER)) {
+					init(container);
+					isGameOver = false;
+					restart(input);
+				}
 			}
 		}
-	}
+	
 
 	private void time() {
 		times--;
@@ -126,9 +130,7 @@ public class Thefrog extends BasicGame {
 		}
 		if (time == 0) {
 			isGameOver = true;
-
 		}
-
 	}
 
 	private void restart(Input input) {
@@ -136,25 +138,18 @@ public class Thefrog extends BasicGame {
 
 			treeCurrent = 0;
 			Frog.vx = 0;
-			//Frog.update();
 			isGameOver = false;
 			isStarted = true;
-
 		}
-
 	}
 
 	private void newgame(Input input) {
 		if (input.isKeyDown(Input.KEY_ENTER) && !isStarted) {
 			isStarted = true;
-			//Frog.render();
-			treeCurrent =0;
-			//Frog.update();
+			treeCurrent = 0;
 			time = 30;
-			Frog.score = 0;
-
+			Frog.score = -1;
 		}
-
 	}
 
 	public void keyPressed(int key, char c) {
