@@ -12,28 +12,28 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
+import FROG.tree;
+
 public class Thefrog extends BasicGame {
 
 	public static final int GAME_WIDTH = 640;
 	public static final int GAME_HEIGHT = 480;
-	public static final float G = (float) 0.5;
-	public static final float Frog_JUMP_VY = 11;
-	public static final int Tree_VX = -2;
+	public static final int Tree_VY = -3;
 	private frog Frog;
 	private tree Tree;
 	private boolean isStarted;
 	private boolean isGameOver;
 	private tree[] trees;
-	private boolean[] useTree = new boolean[] { false, false, false };
 	private Image land;
-	public static final float bg_Vy = -3;
 	public int treeCurrent = 0;
 	private int times = 30;
 	public static int checkTrees = 0;
 	private int time = 30;
 	private Image started;
 	private Image overgame;
-	private clock Clock;
+	private int treecount = 4;
+	static int x;
+	
 
 	public Thefrog(String title) {
 		super(title);
@@ -49,17 +49,17 @@ public class Thefrog extends BasicGame {
 			for (tree Trees : trees) {
 				Trees.render();
 			}
-			//Clock.render();
+			
 			Frog.render();
 			g.setColor(Color.white);
-			g.drawString("score = " + Frog.score, 280, 20);
+			g.drawString("score = " + Frog.score/100, 280, 20);
 			g.drawString("Time : " + time, 500, 20);
 		}
 		if (isStarted == false) {
 			g.drawImage(started, 0, 0);
 		} else if (isGameOver == true) {
 			g.drawImage(overgame, 0, 0);
-			g.drawString(" " + Frog.score, 280, 350);
+			g.drawString(" " + Frog.score/100, 280, 350);
 		}
 
 	}
@@ -68,8 +68,7 @@ public class Thefrog extends BasicGame {
 	public void init(GameContainer container) throws SlickException {
 
 		land = new Image("res/bg1.png");
-		Frog = new frog(GAME_WIDTH / 2, 40, Frog_JUMP_VY);
-		//Clock = new clock(300, 200);
+		Frog = new frog(GAME_WIDTH / 2, 40);
 		inittrees();
 		isStarted = false;
 		started = new Image("res/start.png");
@@ -77,10 +76,13 @@ public class Thefrog extends BasicGame {
 	}
 
 	private void inittrees() throws SlickException {
-		trees = new tree[4];
-		trees[0] = new tree(GAME_WIDTH / 2, 40, Tree_VX);
-		for (int i = 1; i < 4; i++) {
-			trees[i] = new tree(80 + 100 * i, 130 * i + 40, Tree_VX - i);
+		trees = new tree[treecount];
+		
+		for (int i = 0; i < treecount; i++) {
+			trees[i] = new tree(1, 1, 1);
+			trees[i].randomx();
+			x = GAME_WIDTH / 2 - 90 + tree.randomx;
+			trees[i] = new tree(x, 150 * i + 50, Tree_VY);
 		}
 	}
 
@@ -92,21 +94,23 @@ public class Thefrog extends BasicGame {
 
 		if (!isGameOver) {
 			newgame(input);
-			if (isStarted == true) {
-				Frog.update();
+			System.out.println(isGameOver+" \\ "+isStarted);
+			if (isStarted) {
 				time();
-				if (treeCurrent != 0 && Frog.y == 20) {
-					isGameOver = true;
-					System.out.println("Game Over");
+				updateMovement(input);
+				for (tree t : trees) {
+					t.update();
 
-				}
-				for (int i = 0; i < 4; i++) {
-					trees[i].update();
-					if (treeCurrent < 4)
-						if (Frog.isCollide(trees[treeCurrent])) {
-							System.out.println("Collision");
-							treeCurrent++;
-						}
+					if (frog.isCollide(t)) {
+						System.out.println("Collision!");
+						isGameOver=true;
+						
+						frog.render();
+					}
+
+					if (frog.x < 0 || frog.y < 0) {
+						System.out.println("Collision!");
+					}
 				}
 			}
 		}
@@ -120,6 +124,7 @@ public class Thefrog extends BasicGame {
 				}
 			}
 		}
+	
 	
 
 	private void time() {
@@ -148,15 +153,25 @@ public class Thefrog extends BasicGame {
 			isStarted = true;
 			treeCurrent = 0;
 			time = 30;
-			Frog.score = -1;
+			Frog.score = 0;
 		}
 	}
 
-	public void keyPressed(int key, char c) {
-		if (key == Input.KEY_SPACE) {
-			Frog.jump();
+	public void updateMovement(Input input) {
+		if (Frog.x >= 640) {
+			Frog.x = 0;
+		}
+		if (Frog.x < 0) {
+			Frog.x = 640;
+		}
+		if (input.isKeyDown(Input.KEY_RIGHT)) {
+			Frog.moveright();
+		}
+		if (input.isKeyDown(Input.KEY_LEFT)) {
+			Frog.moveleft();
 		}
 	}
+
 
 	public static void main(String[] args) {
 		try {
