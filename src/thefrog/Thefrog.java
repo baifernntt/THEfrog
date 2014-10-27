@@ -12,7 +12,6 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 
-import FROG.tree;
 
 public class Thefrog extends BasicGame {
 
@@ -26,9 +25,9 @@ public class Thefrog extends BasicGame {
 	private tree[] trees;
 	private Image land;
 	public int treeCurrent = 0;
-	private int times = 30;
+	private int times = 60;
 	public static int checkTrees = 0;
-	private int time = 30;
+	private int time = 60;
 	private Image started;
 	private Image overgame;
 	private int treecount = 4;
@@ -130,7 +129,7 @@ public class Thefrog extends BasicGame {
 	private void time() {
 		times--;
 		if (times == 0) {
-			times = 30;
+			times = 60;
 			time--;
 		}
 		if (time == 0) {
@@ -152,7 +151,7 @@ public class Thefrog extends BasicGame {
 		if (input.isKeyDown(Input.KEY_ENTER) && !isStarted) {
 			isStarted = true;
 			treeCurrent = 0;
-			time = 30;
+			time = 60;
 			Frog.score = 0;
 		}
 	}
